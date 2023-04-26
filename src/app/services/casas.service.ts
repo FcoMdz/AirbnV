@@ -11,6 +11,14 @@ export class CasasService {
       precio:100000,
       rutaImg:"../../assets/images/img1.png",
       descripcion:"Esta casa tiene bastante que ofrecer"
+     },
+
+     {
+      id: 2,
+      nombre: "Casa 2",
+      precio: 200000,
+      rutaImg: "../../assets/images/img2.jpg",
+      descripcion: "Es una casa de prueba"
      }
   
   ];
@@ -18,7 +26,7 @@ export class CasasService {
 
  
 }
-interface Casa {
+export interface Casa {
   id:number;
   nombre:string;
   precio:number;
