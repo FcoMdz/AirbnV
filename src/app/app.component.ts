@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,15 @@ export class AppComponent implements OnInit{
   termino:HTMLInputElement | undefined;
   busqueda:string = "";
 
+  constructor(private primengConfig: PrimeNGConfig){
+
+  }
+
   ngOnInit(): void {
+    //PrimeNG
+    this.primengConfig.ripple = true;
     //Busqueda
     this.termino = <HTMLInputElement> document.getElementById("termino")!;
-    console.log(this.termino);
     this.termino.addEventListener("keyup",() => {
       if(this.termino!=undefined){
         this.busqueda = this.termino.value;
