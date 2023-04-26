@@ -55,6 +55,7 @@ export class BusquedaComponent implements OnInit{
           || element.nombre.toLowerCase().includes(this.busqueda.toLowerCase())
           || element.descripcion.toLowerCase().includes(this.busqueda.toLowerCase())
           || element.tags.toString().toLowerCase().includes(this.busqueda.toLowerCase())
+          || element.ubicacion.name.toLowerCase().includes(this.busqueda.toLowerCase())
         ){
         this.resultados.push(element);
         if(element.precio > this.maxValue) this.maxValue = element.precio;
