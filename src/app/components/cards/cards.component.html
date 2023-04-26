@@ -1,0 +1,19 @@
+<div class="row my-4">
+    <div @fade class="card col-12 col-md-6 col-lg-4 col-xl-3 my-1" *ngFor="let casa of casas">
+        <img [src]="casa.rutaImg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title text-center" ><p [outerHTML]="casa.nombre"></p></h5>
+            <div class="card-text" >
+                <p [outerHTML]="casa.descripcion"></p>
+            </div>
+            <div class="card-text flex flex-wrap my-3" style="display: flex; flex-wrap: wrap;">
+                <p class="m-1"><p-chip label="${{casa.precio}}" icon="pi pi-money-bill"></p-chip></p>
+                <p class="m-1"><p-chip label="{{casa.maxPersonas}}" icon="pi pi-user"></p-chip></p>
+                <p class="m-1"><p-chip label="{{casa.ubicacion.name}}" icon="pi pi-map-marker"></p-chip></p>
+            </div>
+            <div class="card-text flex align-items-center gap-2 flex-wrap">
+                <p-tag class="m-1" *ngFor="let caracteristica of casa.tags" value="{{caracteristica}}"></p-tag>
+            </div>
+        </div>
+    </div>
+</div>
