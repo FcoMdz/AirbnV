@@ -1,1 +1,12 @@
-<p>cards works!</p>
+<div class="card" *ngFor="let casa of casas">
+    <img [src]="casa.rutaImg" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title" ><p [outerHTML]="casa.nombre"></p></h5>
+        <div class="card-text" >
+            <p [outerHTML]="casa.descripcion"></p>
+        </div>
+        <p class="card-text" >
+            <small class="text-muted" >$<p [outerHTML]="casa.precio"></p></small>
+        </p>
+    </div>
+</div>
