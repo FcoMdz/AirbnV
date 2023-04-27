@@ -86,42 +86,31 @@ export class BusquedaComponent implements OnInit{
   filtrarResultados():void{
     if(this.ciudadSeleccionada == null) this.ciudadSeleccionada = {name: "", code: ""};
     this.resultadosFiltrados = [];
-    this.resultados.forEach(element => {
-      if(element.precio >= this.rangeValues[0] && element.precio <= this.rangeValues[1]
-         && element.maxPersonas >= this.cantPersonas){
-          if(this.ciudadSeleccionada.code != "" ){
-            if(this.ciudadSeleccionada.code == element.ubicacion.code){
-              if(this.tagsSeleccion.length == 0){
-                this.resultadosFiltrados.push(element);
-              }else{
-                var flag = false;
-                this.tagsSeleccion.forEach(tagSel =>{
-                  if(element.tags.includes(tagSel)){
-                    flag = true;
-                  }
-                });
-                if(flag){
-                  this.resultadosFiltrados.push(element);
-                }
-              }
-            }
-          }else{
-            if(this.tagsSeleccion.length == 0){
-              this.resultadosFiltrados.push(element);
-            }else{
-              var flag = false;
-              this.tagsSeleccion.forEach(tagSel =>{
-                if(element.tags.includes(tagSel)){
-                  flag = true;
-                }
-              });
-              if(flag){
-                this.resultadosFiltrados.push(element);
-              }
-            }
-          }
+
+    for (let i = 0; i < this.resultados.length; i++) {
+
+      const element = this.resultados[i];
+      if(element.precio < this.rangeValues[0] ||
+         element.precio > this.rangeValues[1] ||
+         element.maxPersonas < this.cantPersonas){
+        continue;
       }
-    });
+
+      if(this.ciudadSeleccionada.code != ""){
+        if(this.ciudadSeleccionada.code != element.ubicacion.code) continue;
+      }
+
+      if(this.tagsSeleccion.length!=0){
+        var flag = false;
+        this.tagsSeleccion.forEach(tagSel =>{
+          if(element.tags.includes(tagSel)){
+            flag = true;
+          }
+        });
+        if(!flag) continue;
+      }
+      this.resultadosFiltrados.push(element);
+    }
   }
 
 }
