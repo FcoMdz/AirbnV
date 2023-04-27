@@ -11,11 +11,7 @@ export class CasasService {
       precio:100000,
       rutaImg:"../../assets/images/img1.png",
       descripcion:"Esta casa tiene bastante que ofrecer",
-<<<<<<< HEAD
-      categoria: "Casa grande"
-     }
-  
-=======
+      categoria: "Casa grande",
       maxPersonas: 5,
       tags: ["Rural","Actividades", "Campo"],
       ubicacion: {name: "Aguascalientes", code: "AGS"}
@@ -27,6 +23,7 @@ export class CasasService {
       precio: 300000,
       rutaImg: "../../assets/images/img2.jpg",
       descripcion: "Es una casa de prueba",
+      categoria: "Casa grande",
       maxPersonas: 10,
       tags: ["Ciudad","Centro comercial"],
       ubicacion: {name: "Guanajuato", code: "GTO"}
@@ -37,6 +34,7 @@ export class CasasService {
       precio: 200000,
       rutaImg: "../../assets/images/img2.jpg",
       descripcion: "Es una casa de prueba",
+      categoria: "Casa grande",
       maxPersonas: 3,
       tags: ["Mar","Playa"],
       ubicacion: {name: "Aguascalientes", code: "AGS"}
@@ -47,6 +45,7 @@ export class CasasService {
       precio: 150000,
       rutaImg: "../../assets/images/img2.jpg",
       descripcion: "Es una casa de prueba",
+      categoria: "Casa grande",
       maxPersonas: 7,
       tags: ["Bosque","Libre"],
       ubicacion: {name: "Ciudad de México", code:"CDMX"}
@@ -57,6 +56,7 @@ export class CasasService {
       precio: 150000,
       rutaImg: "../../assets/images/img2.jpg",
       descripcion: "Es una casa de prueba",
+      categoria: "Casa grande",
       maxPersonas: 7,
       tags: ["Bosque","Libre"],
       ubicacion: {name: "Ciudad de México", code:"CDMX"}
@@ -67,6 +67,7 @@ export class CasasService {
       precio: 200000,
       rutaImg: "../../assets/images/img2.jpg",
       descripcion: "Es una casa de prueba",
+      categoria: "Casa grande",
       maxPersonas: 3,
       tags: ["Mar","Playa","Vista"],
       ubicacion: {name: "Aguascalientes", code: "AGS"}
@@ -76,11 +77,11 @@ export class CasasService {
       precio:100000,
       rutaImg:"../../assets/images/img1.png",
       descripcion:"Esta casa tiene bastante que ofrecer",
+      categoria: "Casa grande",
       maxPersonas: 5,
       tags: ["Rural","Actividades", "Campo"],
       ubicacion: {name: "Aguascalientes", code: "AGS"}
      },
->>>>>>> f7d0cbc445c06c9d5510de3f1b0cfbe74692e98f
   ];
   constructor() { }
 
@@ -92,13 +93,10 @@ export interface Casa {
   precio:number;
   rutaImg:string;
   descripcion:string;
-<<<<<<< HEAD
   categoria:string;
-=======
   maxPersonas:number;
   tags: string[];
   ubicacion: Bioma;
->>>>>>> f7d0cbc445c06c9d5510de3f1b0cfbe74692e98f
 }
 
 export interface Bioma {
