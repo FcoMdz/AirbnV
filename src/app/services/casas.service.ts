@@ -10,7 +10,8 @@ export class CasasService {
       nombre: "Casa 1",
       precio:100000,
       rutaImg:"../../assets/images/img1.png",
-      descripcion:"Esta casa tiene bastante que ofrecer"
+      descripcion:"Esta casa tiene bastante que ofrecer",
+      categoria: "Casa grande"
      }
   
   ];
@@ -24,4 +25,5 @@ interface Casa {
   precio:number;
   rutaImg:string;
   descripcion:string;
+  categoria:string;
 }
