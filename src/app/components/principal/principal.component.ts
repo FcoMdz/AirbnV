@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CasasService } from 'src/app/services/casas.service';
+import { Casa, CasasService } from 'src/app/services/casas.service';
 
 @Component({
   selector: 'boot-principal',
@@ -8,7 +8,7 @@ import { CasasService } from 'src/app/services/casas.service';
 })
 export class PrincipalComponent {
 
-  casas:any [];
+  casas:Casa [];
  constructor (public casasService: CasasService){
     this.casas = casasService.casas;
  }
