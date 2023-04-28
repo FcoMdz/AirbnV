@@ -1,0 +1,8 @@
+
+.card-columns {
+    @media media-breakpoint-up(xxl) {
+        column-count: 5;
+    
+    }
+  }
+  
