@@ -19,6 +19,7 @@ import { TagModule } from 'primeng/tag';
 import { AnimateModule } from 'primeng/animate';
 import { Checkbox, CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { CasaComponent } from './components/casa/casa.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { DropdownModule } from 'primeng/dropdown';
     AppComponent,
     PrincipalComponent,
     BusquedaComponent,
-    CardsComponent
+    CardsComponent,
+    CasaComponent
   ],
   imports: [
     BrowserModule,
