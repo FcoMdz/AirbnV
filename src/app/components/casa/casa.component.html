@@ -1,33 +1,40 @@
 
   <div class="card row m-4 text-center">
-    <div id="carouselExampleIndicators" class="carousel slide margen-lados "  style="width: 30%;">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img [src]="casa.rutaImg" class="d-block mx-10 my-2" >
+    <div class="row">
+      <div class="col-6">
+        <div id="carouselExampleIndicators" class="carousel slide margen-lados "  style="width: 100%;">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img [src]="casa.rutaImg" class="d-block mx-10 my-2" >
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+
+      </div>
+      <div class="col-6">
+        <h5 class="card-title">{{casa.nombre}}</h5>
+        <div class="card-text" >
+            <p [outerHTML]="casa.descripcion"></p>
+        </div>
+        <div class="card-text flex align-items-center gap-2 flex-wrap ">
+            <p-tag class="m-1" *ngFor="let caracteristica of casa.tags" value="{{caracteristica}}"></p-tag>
+        </div>
     </div>
+    </div>
+    
         <div class="card-body row">
-        <div class="col-6">
-            <h5 class="card-title">{{casa.nombre}}</h5>
-            <div class="card-text" >
-                <p [outerHTML]="casa.descripcion"></p>
-            </div>
-            <div class="card-text flex align-items-center gap-2 flex-wrap ">
-                <p-tag class="m-1" *ngFor="let caracteristica of casa.tags" value="{{caracteristica}}"></p-tag>
-            </div>
-        </div>
+
         <div class="col-6">
             <div class="card-text flex flex-wrap my-3" style="display: flex; flex-wrap: wrap;">
                 <p class="m-1"><p-chip label="${{casa.precio}}" icon="pi pi-money-bill"></p-chip></p>
