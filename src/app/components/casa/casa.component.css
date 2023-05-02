@@ -5,7 +5,10 @@ img{
     height: 100%;
     width: 100%;
 }
-.margen-lados{
-   margin-left: 15%;
-    margin-right: 40%;
+.etiquetas{
+    display: flex; 
+    justify-content: center;
+}
+.centrar{
+    margin: 0 auto;
 }
