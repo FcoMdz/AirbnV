@@ -12,3 +12,6 @@ img{
 .centrar{
     margin: 0 auto;
 }
+.contenidoCentrar{
+    margin: auto auto;
+}

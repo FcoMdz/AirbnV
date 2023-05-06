@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { max, retry } from 'rxjs';
 import { Casa, CasasService } from 'src/app/services/casas.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { Casa, CasasService } from 'src/app/services/casas.service';
   styleUrls: ['./casa.component.css']
 })
 export class CasaComponent implements OnInit {
+  i:number[] = [];
   casa: Casa = {id: 0,
     nombre: "",
     precio: 0,
@@ -18,8 +20,11 @@ export class CasaComponent implements OnInit {
     tags: [],
     ubicacion: {name:"",code:""}
   }; 
-
+  fechaActual = new Date();
+  fecha:string = "";
+ 
   constructor(private casaService:CasasService, private rutaActiva:ActivatedRoute){
+    
     const routeParams = this.rutaActiva.snapshot.params;
     this.casaService.casas.forEach(casita => {
       if(casita.nombre === this.rutaActiva.snapshot.params['casa']){
@@ -35,9 +40,12 @@ export class CasaComponent implements OnInit {
           ubicacion: casita.ubicacion
         }
       }
+
     });
   }
   ngOnInit(){
+    this.fecha = this.fechaActual.toLocaleString( );
+    console.log(this.fecha)
     const routeParams = this.rutaActiva.snapshot.params;
     this.casaService.casas.forEach(casita => {
       if(casita.nombre === this.rutaActiva.snapshot.params['casa']){
@@ -54,7 +62,13 @@ export class CasaComponent implements OnInit {
         }
       }
     });
+    this.validadCiclo();
     console.log(this.casa)
   }
- 
+  validadCiclo():void{
+    for(let a = 1; a <= this.casa.maxPersonas; a++ ){
+      this.i[a-1]=a-1;
+      console.log(this.i);
+    }
+  }
 }

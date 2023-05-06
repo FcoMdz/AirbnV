@@ -22,9 +22,10 @@
         </div>
 
       </div>
-        <div class="col-6">
+        <div class="col-6 contenidoCentrar">
           <h5 class="card-title">{{casa.nombre}}</h5>
-          <div class="card-text" >
+          <hr>
+          <div class="card-text">
             <p [outerHTML]="casa.descripcion"></p>
           </div>
           <div class="card-text flex align-items-center gap-2 flex-wrap ">
@@ -33,7 +34,7 @@
       </div>
     </div>
         <div class="card-body row">
-
+          
           <div class="col-6 text-center centrar">
             <div class="card-text my-3 etiquetas">
                 <p class="m-1"><p-chip label="${{casa.precio}}" icon="pi pi-money-bill"></p-chip></p>
@@ -44,10 +45,26 @@
         
         </div>
         <div class="card-body row">
-          <div class="col-6">
-            <div class="form-date"><label class="form-date__label" for="input-date">Fecha de inicio</label>
-            <input class="form-date__input" type="date" id="input-date" name="input-date-start" value='2023-08-20'></div>
+          <div class="col-4">
+            <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-inicio">Fecha de inicio</label>
+              <input class="form-date__input form-control" type="date" id="input-date-inicio" name="input-date-start" [value]="fecha"></div>
+              <hr>
+              <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-final">Fecha de final</label>
+                <input class="form-date__input form-control" type="date" id="input-date-final" name="input-date-start" [value]="fecha"></div>
           </div>
-          
+          <div class="col-4">
+            <div class="input-group">
+              <label class="input-group-text" for="inputGroupSelect01">No. de personas</label>
+              <select class="form-select" id="inputGroupSelect01">
+                <option selected>Elegir...</option>
+                <option *ngFor="let value of i"  [value]="value+1">{{value+1}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-4">
+            <div>
+              <button class="btn btn-outline-dark ">Hacer cotización</button>
+            </div>
+          </div>
         </div>
   </div>
