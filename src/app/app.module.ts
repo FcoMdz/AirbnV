@@ -9,7 +9,7 @@ import { CasasService } from './services/casas.service';
 
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { CardsComponent } from './components/cards/cards.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SliderModule } from 'primeng/slider';
 import { CalendarModule } from 'primeng/calendar';
@@ -43,7 +43,9 @@ import { CasaComponent } from './components/casa/casa.component';
     AnimateModule,
     BrowserAnimationsModule,
     CheckboxModule,
-    DropdownModule
+    DropdownModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [CasasService],
   bootstrap: [AppComponent]

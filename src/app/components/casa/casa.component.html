@@ -44,27 +44,40 @@
           </div>
         
         </div>
-        <div class="card-body row">
-          <div class="col-4">
-            <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-inicio">Fecha de inicio</label>
-              <input class="form-date__input form-control" type="date" id="input-date-inicio" name="input-date-start" [value]="fecha"></div>
-              <hr>
-              <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-final">Fecha de final</label>
-                <input class="form-date__input form-control" type="date" id="input-date-final" name="input-date-start" [value]="fecha"></div>
-          </div>
-          <div class="col-4">
-            <div class="input-group">
-              <label class="input-group-text" for="inputGroupSelect01">No. de personas</label>
-              <select class="form-select" id="inputGroupSelect01">
-                <option selected>Elegir...</option>
-                <option *ngFor="let value of i"  [value]="value+1">{{value+1}}</option>
-              </select>
+        <form [formGroup]="reserva" (ngSubmit)="registrarReserva()">
+          <div class="card-body row">
+            <div class="col-4">
+              <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-inicio">Fecha de inicio</label>
+                <input formControlName="FechaInicio" class="form-date__input form-control" type="date" id="input-date-inicio" name="input-date-start" ></div>
+                <hr>
+                <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-final">Fecha de final</label>
+                  <input formControlName="FechaFinal" class="form-date__input form-control" type="date" id="input-date-final" name="input-date-start"></div>
+            </div>
+            <div class="col-4">
+              <div class="input-group">
+                <label class="input-group-text" for="inputGroupSelect01">No. de personas</label>
+                <select class="form-select" id="inputGroupSelect01" formControlName="CantidadPersona">
+                  <option *ngFor="let value of i"  [value]="value+1">{{value+1}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div>
+                <button type="submit" class="btn btn-outline-dark" >Hacer cotización</button>
+              </div>
             </div>
           </div>
-          <div class="col-4">
-            <div>
-              <button class="btn btn-outline-dark ">Hacer cotización</button>
-            </div>
+        </form>
+        <div class="card-footer text-center">
+          <div *ngIf="reserva.valid; else error" class="alert alert-success">
+            Los datos ingresados son correctos
           </div>
-        </div>
+          <ng-template #error >
+            <div class="alert alert-danger">
+              Los datos ingresados son incorrectos
+            </div>
+            
+          </ng-template>
+          </div>
+        
   </div>
