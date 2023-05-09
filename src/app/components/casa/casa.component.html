@@ -1,0 +1,83 @@
+
+  <div class="card row m-4 text-center">
+    <div class="row">
+      <div class="col-6">
+        <div id="carouselExampleIndicators" class="carousel slide centrar"  style="width: 100%;">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img [src]="casa.rutaImg" class="d-block mx-10 my-2" >
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+      </div>
+        <div class="col-6 contenidoCentrar">
+          <h5 class="card-title">{{casa.nombre}}</h5>
+          <hr>
+          <div class="card-text">
+            <p [outerHTML]="casa.descripcion"></p>
+          </div>
+          <div class="card-text flex align-items-center gap-2 flex-wrap ">
+            <p-tag class="m-1" *ngFor="let caracteristica of casa.tags" value="{{caracteristica}}"></p-tag>
+          </div>
+      </div>
+    </div>
+        <div class="card-body row">
+          
+          <div class="col-6 text-center centrar">
+            <div class="card-text my-3 etiquetas">
+                <p class="m-1"><p-chip label="${{casa.precio}}" icon="pi pi-money-bill"></p-chip></p>
+                <p class="m-1"><p-chip label="{{casa.maxPersonas}}" icon="pi pi-user"></p-chip></p>
+                <p class="m-1"><p-chip label="{{casa.ubicacion.name}}" icon="pi pi-map-marker"></p-chip></p>
+            </div>  
+          </div>
+        
+        </div>
+        <form [formGroup]="reserva" (ngSubmit)="registrarReserva()">
+          <div class="card-body row">
+            <div class="col-4">
+              <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-inicio">Fecha de inicio</label>
+                <input formControlName="FechaInicio" class="form-date__input form-control" type="date" id="input-date-inicio" name="input-date-start" ></div>
+                <hr>
+                <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-final">Fecha de final</label>
+                  <input formControlName="FechaFinal" class="form-date__input form-control" type="date" id="input-date-final" name="input-date-start"></div>
+            </div>
+            <div class="col-4">
+              <div class="input-group">
+                <label class="input-group-text" for="inputGroupSelect01">No. de personas</label>
+                <select class="form-select" id="inputGroupSelect01" formControlName="CantidadPersona">
+                  <option *ngFor="let value of i"  [value]="value+1">{{value+1}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div>
+                <button type="submit" class="btn btn-outline-dark" >Hacer cotización</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="card-footer text-center">
+          <div *ngIf="reserva.valid; else error" class="alert alert-success">
+            Los datos ingresados son correctos
+          </div>
+          <ng-template #error >
+            <div class="alert alert-danger">
+              Los datos ingresados son incorrectos
+            </div>
+            
+          </ng-template>
+          </div>
+        
+  </div>
