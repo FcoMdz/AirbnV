@@ -31,13 +31,15 @@
         <input class="form-control me-2" id="termino" type="search" placeholder="Search" aria-label="Search">
         <button routerLink="busqueda/{{ busqueda }}" class="btn btn-outline-dark" type="submit">Search</button>
       </form>
+      <div>
+        <button class="btn btn-primary mx-2" routerLink="registro">Registrarse</button>
+      </div>
     </div>
   </div>
 </nav>
 <div class="row">
   <router-outlet></router-outlet>
 </div>
-
 <footer class="bg-white">
   <div class="container py-5">
     <div class="row py-4">
