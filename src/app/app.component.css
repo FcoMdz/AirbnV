@@ -1,0 +1,30 @@
+nav{
+    background: linear-gradient(135deg, #9b59b6,#71b7e6 );
+}
+footer{
+    background: linear-gradient(135deg, #9b59b6,#71b7e6 );
+}
+
+.social{
+    text-align:center;
+
+    font-size:24px;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    display:flex;
+    text-align:center;
+    color: #ccc;
+    margin:8px;
+    opacity:0.75;
+}
+i{
+    font-size:24px;
+    margin:8px;
+    width:40px;
+    height:40px;
+    color: black;
+}
+.social > a:hover {
+    opacity:0.9;
+  }
