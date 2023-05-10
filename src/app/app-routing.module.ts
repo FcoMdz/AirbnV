@@ -7,10 +7,9 @@ import { RegistroComponent } from './components/registro/registro.component';
 
 const routes: Routes = [
   { path: 'busqueda/:termino', component: BusquedaComponent},
-  { path: 'busqueda/:termino/:casa', component: CasaComponent}, // con esto corregí lo que pasaba en el buscador, pero no me gusta :C 
   { path: 'busqueda', component: BusquedaComponent},
   { path: 'registro',  component: RegistroComponent},
-  {path: ':casa', component: CasaComponent},
+  { path: 'casa/:casa', component: CasaComponent},
   { path: '', component: PrincipalComponent }
 ];
 

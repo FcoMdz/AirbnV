@@ -11,6 +11,10 @@ import { Casa, CasasService } from 'src/app/services/casas.service';
 })
 export class CasaComponent implements OnInit {
   i:number[] = [];
+  minDate: Date = new Date();
+  tmpDate: Date = new Date();
+  maxDate: Date = new Date(this.tmpDate.setMonth(this.tmpDate.getMonth() + 12));
+  rangeDates: Date[] = [this.minDate, this.minDate];
   reserva!:FormGroup;
   casa: Casa = {id: 0,
     nombre: "",

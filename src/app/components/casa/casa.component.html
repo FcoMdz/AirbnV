@@ -47,11 +47,12 @@
         <form [formGroup]="reserva" (ngSubmit)="registrarReserva()">
           <div class="card-body row">
             <div class="col-4">
-              <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-inicio">Fecha de inicio</label>
-                <input formControlName="FechaInicio" class="form-date__input form-control" type="date" id="input-date-inicio" name="input-date-start" ></div>
-                <hr>
-                <div class="form-date input-group"><label class="form-date__label input-group-text" for="input-date-final">Fecha de final</label>
-                  <input formControlName="FechaFinal" class="form-date__input form-control" type="date" id="input-date-final" name="input-date-start"></div>
+              <div class="">
+                <label class="form-control" for="calendario">Fechas</label>
+                <p-calendar  id="calendario" inputId="calendario" class="mb-2" [(ngModel)]="rangeDates" selectionMode="range" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true"></p-calendar>
+                
+              </div>
+                
             </div>
             <div class="col-4">
               <div class="input-group">
