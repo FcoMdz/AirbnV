@@ -48,12 +48,9 @@ export class CasaComponent implements OnInit {
       }
 
     });
-    this.reserva = new FormGroup({
-      'FechaInicio': new FormControl(this.fechaActual.toLocaleDateString,[Validators.required]),
-      'FechaFinal': new FormControl('',[Validators.required]),
-      'CantidadPersona' : new FormControl('1',[Validators.required])
-    });
+    
   }
+
   ngOnInit(){
     this.fecha = this.fechaActual.toLocaleString( );
     const routeParams = this.rutaActiva.snapshot.params;
@@ -72,17 +69,30 @@ export class CasaComponent implements OnInit {
         }
       }
     });
+    this.reserva = new FormGroup({
+      'fecha': new FormControl(this.fechaActual.toLocaleDateString,[Validators.required]),
+      'CantidadPersona' : new FormControl('1',[Validators.required])
+    });
     this.validadCiclo();
   }
+
   validadCiclo():void{
     for(let a = 1; a <= this.casa.maxPersonas; a++ ){
       this.i[a-1]=a-1;
     }
   }
-  registrarReserva():void{
-    let fechaIreserva = new Date(this.reserva.value["FechaInicio"]).toLocaleDateString();
 
-    console.log(fechaIreserva)
-    console.log(this.fecha)
+  registrarReserva():void{
+    //Aqui se obtienen las fechas que selecciono el usuario
+    let fechaSeleccionadaInicio = this.rangeDates[0].toLocaleTimeString();
+    let fechaSeleccionadaFinal = this.rangeDates[1].toLocaleDateString();
+
+    //NOTA: hay que hacer dinámica la seleccion de fechas y comprobar que sea correcto
+    console.log(fechaSeleccionadaFinal);
+    console.log(fechaSeleccionadaInicio);
+    //let fechaIreserva = new Date(this.reserva.value["FechaInicio"]).toLocaleDateString();
+
+    //console.log(fechaIreserva)
+    //console.log(this.fecha)
   }
 }

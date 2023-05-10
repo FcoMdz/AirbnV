@@ -48,11 +48,9 @@
           <div class="card-body row">
             <div class="col-4">
               <div class="">
-                <label class="form-control" for="calendario">Fechas</label>
-                <p-calendar  id="calendario" inputId="calendario" class="mb-2" [(ngModel)]="rangeDates" selectionMode="range" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true"></p-calendar>
-                
+                <label class="form-control" for="calendario1">Fechas</label>
+                <p-calendar dateFormat="dd/mm/yy" formControlName="fecha" inputId="calendario1" class="mb-2" [(ngModel)]="rangeDates" selectionMode="range" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true"></p-calendar>
               </div>
-                
             </div>
             <div class="col-4">
               <div class="input-group">
