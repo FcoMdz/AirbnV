@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { ConocenosComponent } from './components/conocenos/conocenos.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { CardsComponent } from './components/cards/cards.component';
@@ -27,10 +26,10 @@ import { Checkbox, CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    ConocenosComponent,
     RegistroComponent,
     PrincipalComponent,
     BusquedaComponent,
