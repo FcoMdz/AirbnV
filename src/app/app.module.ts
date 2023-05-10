@@ -24,6 +24,7 @@ import { TagModule } from 'primeng/tag';
 import { AnimateModule } from 'primeng/animate';
 import { Checkbox, CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
 
 
@@ -34,7 +35,8 @@ import { DropdownModule } from 'primeng/dropdown';
     PrincipalComponent,
     BusquedaComponent,
     CardsComponent,
-    CasaComponent
+    CasaComponent,
+    ConocenosComponent
   ],
   imports: [
     BrowserModule,

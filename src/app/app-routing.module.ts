@@ -4,12 +4,14 @@ import { BusquedaComponent } from './components/busqueda/busqueda.component';
 import { PrincipalComponent } from './components/principal/principal.component';
 import { CasaComponent } from './components/casa/casa.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
 const routes: Routes = [
   { path: 'busqueda/:termino', component: BusquedaComponent},
   { path: 'busqueda', component: BusquedaComponent},
   { path: 'registro',  component: RegistroComponent},
   { path: 'casa/:casa', component: CasaComponent},
+  { path: 'conocenos', component: ConocenosComponent},
   { path: '', component: PrincipalComponent }
 ];
 
