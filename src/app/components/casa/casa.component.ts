@@ -50,7 +50,11 @@ export class CasaComponent implements OnInit {
       }
 
     });
+    this.actualizarFechasDisponibles();
 
+  }
+
+  actualizarFechasDisponibles():void{
     let infoCasas:casasData[];
     if(localStorage.getItem("casasData") != null){
       infoCasas = JSON.parse(localStorage.getItem('casasData') || "{}");
@@ -94,6 +98,7 @@ export class CasaComponent implements OnInit {
     this.validadCiclo();
   }
 
+
   validadCiclo():void{
     for(let a = 1; a <= this.casa.maxPersonas; a++ ){
       this.i[a-1]=a-1;
@@ -102,8 +107,16 @@ export class CasaComponent implements OnInit {
 
   registrarReserva():void{
     //Aqui se obtienen las fechas que selecciono el usuario
-    let fechaSeleccionadaInicio = this.reserva.value.fecha[0].toDateString();
-    let fechaSeleccionadaFinal = this.reserva.value.fecha[1].toDateString();
+    let fechaSeleccionadaInicio:string;
+    let fechaSeleccionadaFinal:string;
+    if(this.reserva.value.fecha[1] == null){
+      fechaSeleccionadaInicio = this.reserva.value.fecha[0].toDateString();
+      fechaSeleccionadaFinal = this.reserva.value.fecha[0].toDateString();
+    }else{
+      fechaSeleccionadaInicio = this.reserva.value.fecha[0].toDateString();
+      fechaSeleccionadaFinal = this.reserva.value.fecha[1].toDateString();
+    }
+
 
     //NOTA: hay que hacer dinámica la seleccion de fechas y comprobar que sea correcto
     let infoCasas:casasData[];
@@ -139,6 +152,7 @@ export class CasaComponent implements OnInit {
         Swal.fire('Apartado Confirmado','Se ha registrado su apartado','success');
       }
     }
+    this.actualizarFechasDisponibles();
     localStorage.setItem('casasData',JSON.stringify(infoCasas));
   }
 
