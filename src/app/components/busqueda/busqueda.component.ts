@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { elementAt } from 'rxjs';
 import { Bioma, Casa, CasasService } from 'src/app/services/casas.service';
+import { casasData } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-busqueda',
@@ -24,10 +25,10 @@ export class BusquedaComponent implements OnInit {
   cantPersonas: number = 1;
   minDate: Date = new Date();
   tmpDate: Date = new Date();
-  maxDate: Date = new Date(this.tmpDate.setMonth(this.tmpDate.getMonth() + 12));
   rangeDates: Date[] = [this.minDate, this.minDate];
   ciudades: Bioma[] = [];
   ciudadSeleccionada: Bioma = { name: "", code: "" };
+  infoCasas:casasData[]=[];
 
   tags: string[] = [];
   tagsSeleccion: string[] = [];
@@ -80,6 +81,12 @@ export class BusquedaComponent implements OnInit {
       this.rangeValues = [this.minValue, this.maxValue];
       this.resultadosFiltrados = this.resultados;
     });
+    if(localStorage.getItem("casasData") != null){
+      this.infoCasas = JSON.parse(localStorage.getItem('casasData') || "{}");
+    }else{
+      this.infoCasas = [];
+    }
+    this.filtrarResultados();
   }
 
   filtrarResultados(): void {
@@ -89,16 +96,20 @@ export class BusquedaComponent implements OnInit {
     for (let i = 0; i < this.resultados.length; i++) {
 
       const element = this.resultados[i];
+
+      //Revisando precio y cantidad de personas
       if (element.precio < this.rangeValues[0] ||
         element.precio > this.rangeValues[1] ||
         element.maxPersonas < this.cantPersonas) {
         continue;
       }
 
+      //Revisando biomas
       if (this.ciudadSeleccionada.code != "") {
         if (this.ciudadSeleccionada.code != element.ubicacion.code) continue;
       }
 
+      //Revisando tags
       if (this.tagsSeleccion.length != 0) {
         var flag = false;
         this.tagsSeleccion.forEach(tagSel => {
@@ -108,6 +119,31 @@ export class BusquedaComponent implements OnInit {
         });
         if (!flag) continue;
       }
+
+      //Comprobando disponibilidad de fechas
+      let band = false
+      for (let index = 0; index < this.infoCasas.length; index++) {
+        const apartado = this.infoCasas[index];
+        if(apartado.id == element.id){
+          let fechaInicio = new Date(apartado.fechaInicio);
+          let fechaFinal = new Date(apartado.fechaFinal);
+          let fechaBusquedaInicio;
+          let fechaBusquedaFinal;
+          if(this.rangeDates[1] == null){
+            fechaBusquedaInicio = new Date(this.rangeDates[0].toDateString());
+            fechaBusquedaFinal = new Date(this.rangeDates[0].toDateString());
+          }else{
+            fechaBusquedaInicio = new Date(this.rangeDates[0].toDateString());
+            fechaBusquedaFinal = new Date(this.rangeDates[1].toDateString());
+          }
+          if(fechaFinal >= fechaBusquedaInicio && fechaInicio <= fechaBusquedaFinal){
+            band = true;
+          }
+
+        }
+      }
+      if(band) continue;
+
       this.resultadosFiltrados.push(element);
     }
   }

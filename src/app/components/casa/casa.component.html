@@ -34,15 +34,20 @@
       </div>
     </div>
         <div class="card-body row">
-          
+
           <div class="col-6 text-center centrar">
             <div class="card-text my-3 etiquetas">
                 <p class="m-1"><p-chip label="${{casa.precio}}" icon="pi pi-money-bill"></p-chip></p>
                 <p class="m-1"><p-chip label="{{casa.maxPersonas}}" icon="pi pi-user"></p-chip></p>
                 <p class="m-1"><p-chip label="{{casa.ubicacion.name}}" icon="pi pi-map-marker"></p-chip></p>
-            </div>  
+            </div>
           </div>
-        
+
+        </div>
+        <div class="row">
+          <div class="col">
+            <div id="map"></div>
+          </div>
         </div>
         <div class="row">
           <div class="col">
@@ -52,15 +57,13 @@
         <form [formGroup]="reserva" (ngSubmit)="registrarReserva()">
           <div class="card-body row">
             <div class="col-6">
-              <div class="">
-                <label class="form-control" for="calendario">Fechas</label>
-                <p-calendar dateFormat="dd/mm/yy" formControlName="fecha" inputId="calendario" class="mb-2" [(ngModel)]="rangeDates" selectionMode="range" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" [inline]="true"></p-calendar>
-              </div> <!--ODA mi vida uwu-->
+              <label class="form-control" for="calendario">Fechas</label>
+              <p-calendar style="width: 100%;" dateFormat="dd/mm/yy" formControlName="fecha" inputId="calendario" class="mb-2" [(ngModel)]="rangeDates" selectionMode="range" [minDate]="minDate" [readonlyInput]="true" [inline]="true" [disabledDates]="diasdesh"></p-calendar>
             </div>
             <div class="col-6">
               <div class="input-group">
-                <label class="input-group-text" for="inputGroupSelect01">No. de personas</label>
-                <select class="form-select" id="inputGroupSelect01" formControlName="CantidadPersona">
+                <label class="input-group-text" for="selectPer">No. de personas</label>
+                <select class="form-select" id="selectPer" formControlName="CantidadPersona">
                   <option *ngFor="let value of i"  [value]="value+1">{{value+1}}</option>
                 </select>
               </div>
@@ -80,9 +83,8 @@
             <div class="alert alert-danger">
               Los datos ingresados son incorrectos
             </div>
-            
+
           </ng-template>
           </div>
-        
+
   </div>
-<script src="casa.component.js"></script>
