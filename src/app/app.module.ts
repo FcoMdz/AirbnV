@@ -26,7 +26,7 @@ import { Checkbox, CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { ConocenosComponent } from './components/conocenos/conocenos.component';
     BusquedaComponent,
     CardsComponent,
     CasaComponent,
-    ConocenosComponent
+    ConocenosComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +53,8 @@ import { ConocenosComponent } from './components/conocenos/conocenos.component';
     CheckboxModule,
     DropdownModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module,
   ],
   providers: [CasasService],
   bootstrap: [AppComponent]
