@@ -28,7 +28,6 @@ export class CasaComponent implements OnInit {
   }; 
   fechaActual = new Date();
   fecha:string = "";
- 
   constructor(private casaService:CasasService, private rutaActiva:ActivatedRoute){
     
     const routeParams = this.rutaActiva.snapshot.params;
@@ -74,6 +73,7 @@ export class CasaComponent implements OnInit {
       'CantidadPersona' : new FormControl('1',[Validators.required])
     });
     this.validadCiclo();
+
   }
 
   validadCiclo():void{
