@@ -1,42 +1,103 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <title> Registro </title>
-    <link rel="stylesheet" href="registro.component.css">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
-<body [ngStyle]="{'background':fondo}">
+<body>
   <div class="container">
     <div class="title">Registro</div>
     <div class="content">
-      <form action="#">
+      <form [formGroup]="usuario" (ngSubmit)="procesar()">
+
         <div class="user-details">
+
           <div class="input-box">
-            <span class="details">Nombre Completo</span>
-            <input type="text" placeholder="Ingresa tu nombre completo" required>
+            <label class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingresa tu nombre completo">
+
+            <div class="alert alert-danger mt-2" [hidden]="name?.pristine || name?.valid">
+              <span *ngIf="name?.errors?.['required']">
+                El nombre es requerido
+              </span>
+              <span *ngIf="name?.errors?.['pattern']">
+                El nombre no puede llevar caracteres especiales y/o numeros
+              </span>
+            </div>
+
           </div>
+
           <div class="input-box">
-            <span class="details">Nombre de usuario</span>
-            <input type="text" placeholder="Ingresa tu nombre de usuario" required>
+            <label class="form-label">Nombre de usuario</label>
+            <input type="text" class="form-control" formControlName="usrName"
+              placeholder="Ingresa tu nombre de usuario">
+
+            <div class="alert alert-danger mt-2" [hidden]="usrName?.pristine || usrName?.valid">
+              <span *ngIf="usrName?.errors?.['required']">
+                El nombre de usuario es requerido
+              </span>
+            </div>
+
           </div>
+
           <div class="input-box">
-            <span class="details">Email</span>
-            <input type="text" placeholder="Ingresa tu email" required>
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control" formControlName="email" placeholder="Ingresa tu email">
+
+            <div class="alert alert-danger mt-2" [hidden]="email?.pristine || email?.valid">
+              <span *ngIf="email?.errors?.['required']">
+                El email es requerido
+              </span>
+              <span *ngIf="email?.errors?.['email']">
+                El email no es valido
+              </span>
+            </div>
+
           </div>
+
           <div class="input-box">
-            <span class="details">Numero de Telefono</span>
-            <input type="text" placeholder="Ingresa tu numero" required>
+            <label class="form-label">Numero de Telefono</label>
+            <input type="text" class="form-control" formControlName="telefono" placeholder="Ingresa tu numero">
+
+            <div class="alert alert-danger mt-2" [hidden]="telefono?.pristine || telefono?.valid">
+              <span *ngIf="telefono?.errors?.['required']">
+                El telefono es requerido
+              </span>
+              <span *ngIf="telefono?.errors?.['minlength'] || telefono?.errors?.['maxlength']">
+                El numero de telefono debe de ser de 10 digitos
+              </span>
+              <span *ngIf="telefono?.errors?.['pattern']">
+                Solo digitos del 0 al 9 son validos
+              </span>
+            </div>
+
           </div>
+
           <div class="input-box">
-            <span class="details">Contraseña</span>
-            <input type="text" placeholder="Escribe una contraseña" required>
+            <label class="form-label">Contraseña</label>
+            <input type="password" class="form-control" formControlName="passwd" placeholder="Escribe una contraseña">
+
+            <div class="alert alert-danger mt-2" [hidden]="passwd?.pristine || passwd?.valid">
+              <span *ngIf="passwd?.errors?.['required']">
+                La contraseña es requerida
+              </span>
+              <span *ngIf="passwd?.errors?.['minlength']">
+                La contraseña debe de tener minimo cinco caracteres
+              </span>
+            </div>
           </div>
-          <div class="input-box"> 
-            <span class="details">Confirmar Contraseña</span>
-            <input type="text" placeholder="Confirma la contraseña" required>
+
+          <div class="input-box">
+            <label class="form-label">Confirmar Contraseña</label>
+            <input type="password" class="form-control" placeholder="Confirma la contraseña">
+
+            <div class="alert alert-danger mt-2" [hidden]="passwd?.pristine || passwd?.valid">
+              <span *ngIf="passwd?.errors?.['required']">
+                La contraseña es requerida
+              </span>
+              <span *ngIf="passwd?.errors?.['minlength']">
+                La contraseña debe de tener minimo cinco caracteres
+              </span>
+            </div>
+
           </div>
+
         </div>
+
         <div class="gender-details">
           <input type="radio" name="gender" id="dot-1">
           <input type="radio" name="gender" id="dot-2">
@@ -44,25 +105,23 @@
           <span class="gender-title">Genero</span>
           <div class="category">
             <label for="dot-1">
-            <span class="dot one"></span>
-            <span class="gender">Hombre</span>
-          </label>
-          <label for="dot-2">
-            <span class="dot two"></span>
-            <span class="gender">Mujer</span>
-          </label>
-          <label for="dot-3">
-            <span class="dot three"></span>
-            <span class="gender">Prefiero no decirlo</span>
+              <span class="dot one"></span>
+              <span class="gender">Hombre</span>
+            </label>
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Mujer</span>
+            </label>
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Prefiero no decirlo</span>
             </label>
           </div>
         </div>
-        <div class="button">
-          <input type="submit" value="Registrar">
-        </div>
+        <button class="btn btn-primary" [disabled]="usuario.invalid">
+          Registrar
+        </button>
       </form>
     </div>
   </div>
-
 </body>
-</html>
