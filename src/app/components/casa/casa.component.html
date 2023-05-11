@@ -44,25 +44,35 @@
           </div>
 
         </div>
+        <div class="row">
+          <div class="col">
+            <div id="map"></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div id="map"></div>
+          </div>
+        </div>
         <form [formGroup]="reserva" (ngSubmit)="registrarReserva()">
           <div class="card-body row">
-            <div class="col-4">
+            <div class="col-6">
               <label class="form-control" for="calendario">Fechas</label>
               <p-calendar style="width: 100%;" dateFormat="dd/mm/yy" formControlName="fecha" inputId="calendario" class="mb-2" [(ngModel)]="rangeDates" selectionMode="range" [minDate]="minDate" [readonlyInput]="true" [inline]="true" [disabledDates]="diasdesh"></p-calendar>
             </div>
-            <div class="col-4">
+            <div class="col-6">
               <div class="input-group">
                 <label class="input-group-text" for="selectPer">No. de personas</label>
                 <select class="form-select" id="selectPer" formControlName="CantidadPersona">
                   <option *ngFor="let value of i"  [value]="value+1">{{value+1}}</option>
                 </select>
               </div>
-            </div>
-            <div class="col-4">
-              <div>
+
+              <div class="my-3">
                 <button type="submit" class="btn btn-outline-dark" >Hacer cotización</button>
               </div>
             </div>
+
           </div>
         </form>
         <div class="card-footer text-center">

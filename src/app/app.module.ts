@@ -27,6 +27,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     DropdownModule,
     FormsModule,
     ReactiveFormsModule,
-    SweetAlert2Module,
+    LeafletModule
   ],
   providers: [CasasService],
   bootstrap: [AppComponent]

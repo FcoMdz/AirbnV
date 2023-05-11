@@ -96,6 +96,7 @@ export class CasaComponent implements OnInit {
       'CantidadPersona' : new FormControl('1',[Validators.required])
     });
     this.validadCiclo();
+
   }
 
 
