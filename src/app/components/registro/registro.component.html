@@ -2,7 +2,7 @@
   <div class="container">
     <div class="title">Registro</div>
     <div class="content">
-      <form>
+      <form [formGroup]="usuario" (ngSubmit)="procesar()">
 
         <div class="user-details">
 
