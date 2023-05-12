@@ -118,8 +118,8 @@
             </label>
           </div>
         </div>
-        <div class="button">
-          <input type="submit" value="Registrar" [hidden]="usuario.invalid">
+        <div id="registro" [ngClass]="usuario.invalid ? 'deshabilitado':'habilitado'" class="button">
+          <input type="submit" value="Registrar">
         </div>
       </form>
     </div>

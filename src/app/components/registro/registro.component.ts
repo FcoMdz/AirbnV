@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -46,25 +47,29 @@ export class RegistroComponent {
   }
 
   procesar() {
-    this.usuarios.push(JSON.stringify(this.usuario.value))
-    localStorage.setItem('usuarios', this.usuarios.toString())
-
-    console.log("this.usuario.value ", this.usuario.value);
-    console.log("this.usuarios ", this.usuarios);
-
-    for (let index = 0; index < this.usuarios.length; index++) {
-      console.log("[" + index + "]", this.usuarios[index]);
+    if(document.getElementById("registro")?.classList.contains("habilitado")){
+      this.usuarios.push(JSON.stringify(this.usuario.value))
+      localStorage.setItem('usuarios', this.usuarios.toString())
+  
+      console.log("this.usuario.value ", this.usuario.value);
+      console.log("this.usuarios ", this.usuarios);
+  
+      for (let index = 0; index < this.usuarios.length; index++) {
+        console.log("[" + index + "]", this.usuarios[index]);
+      }
+  
+      //Recuperamos la info de LocalStorage y almacenamos en el array de objetos
+      for (let index = 0; index < this.usuarios.length; index++) {
+        this.usuariosAux[index] = JSON.parse(this.usuarios[index]);
+      }
+  
+      for (let index = 0; index < this.usuariosAux.length; index++) {
+        console.log("[" + index + "]", this.usuariosAux[index]);
+      }
+      Swal.fire('Registro confirmado','Se ha registrado correctamente','success');
+    }else{
+      Swal.fire('Error','Revise que los datos esten completos','error');
     }
-
-    //Recuperamos la info de LocalStorage y almacenamos en el array de objetos
-    for (let index = 0; index < this.usuarios.length; index++) {
-      this.usuariosAux[index] = JSON.parse(this.usuarios[index]);
-    }
-
-    for (let index = 0; index < this.usuariosAux.length; index++) {
-      console.log("[" + index + "]", this.usuariosAux[index]);
-    }
-
   }
 
   checkPasswd(): boolean {

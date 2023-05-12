@@ -30,6 +30,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { VideoPipe } from './video.pipe';
 import { DudasComponent } from './dudas/dudas.component';
+import { ReservacionesComponent } from './components/reservaciones/reservaciones.component';
+import { SkinsComponent } from './components/skins/skins.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { DudasComponent } from './dudas/dudas.component';
     ConocenosComponent,
     VideoPipe,
     DudasComponent,
+    ReservacionesComponent,
+    SkinsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,18 +1,14 @@
 <div class="card m-4 text-center">
   <div class="card-body row">
-
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-6 mb-3">
       <div id="carouselExampleFade" class="carousel slide carousel-fade">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img [src]="casa.rutaImg[0]" class="d-block w-100" alt="...">
+            <img src="../../../assets/casas/{{casa.carpetaImg}}/{{casa.rutaImg[0]}}" class="d-block w-100 rounded" alt="...">
           </div>
-          <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="..." class="d-block w-100" alt="...">
-          </div>
+            <div class="carousel-item" *ngFor="let imagen of casa.rutaImg | slice:1; let i = index;">
+              <img src="../../../assets/casas/{{casa.carpetaImg}}/{{imagen}}" class="d-block w-100 rounded" alt="...">
+            </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -27,7 +23,7 @@
     
     <div class="col-12 col-lg-6 contenidoCentrar">
       <h5 class="card-title">{{ casa.nombre }}</h5>
-      <hr />
+      <hr>
       <div class="card-text">
         <p [outerHTML]="casa.descripcion"></p>
       </div>
@@ -67,9 +63,9 @@
     </div>-->
   <div class="card-body">
     <div class="row">
-      <div class="col-12 col-sm-10 offset-sm-1 offset-lg-0 col-lg-7 col-xl-5">
+      <div class="col-12 col-sm-10 offset-sm-1 offset-lg-0 col-lg-7 col-xl-5 card mb-2 mb-lg-0">
         <form [formGroup]="reserva" (ngSubmit)="registrarReserva()">
-          <div class="card justify-content-center text-center" id="formulario">
+          <div class="justify-content-center text-center" id="formulario">
             <div class="m-2">
               <label class="form-control mb-2" for="calendario">Fechas</label>
               <p-calendar
@@ -106,7 +102,7 @@
           </div>
         </form>
       </div>
-      <div class="col-12 col-sm-10 offset-sm-1 offset-lg-0 col-lg-5 col-xl-7">
+      <div class="col-12 col-sm-10 offset-sm-1 offset-lg-0 col-lg-5 col-xl-7 rounded">
         <div class="map-container">
           <div class="map-frame">
             <div id="map"></div>

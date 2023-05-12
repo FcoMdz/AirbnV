@@ -1,18 +1,18 @@
-<nav class="navbar navbar-expand-md" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
   <div class="container-fluid" >
-    <!--<a class="navbar-brand" routerLink="">Airbnv</a>-->
-    <img src="../assets/Img/777.png" alt="" width="60" class="mb-3" class="nav777">
+    <a class="navbar-brand" routerLink="home">
+      <img src="../assets/Img/777.png" alt="" width="60" class="mb-3" class="nav777">
+    </a>
+    
     <button class="navbar-toggler btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="">Home</a>
+          <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="home">AirbnV</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="vista">Dudas</a>
-        </li>
+        
         <!--<li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
@@ -24,8 +24,18 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>-->
+        
         <li class="nav-item">
-          <a class="nav-link" routerLink="conocenos">Conocenos</a>
+          <a class="nav-link" routerLinkActive="active" routerLink="reservaciones">Reservaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="skins">Skins</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="dudas">Dudas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="conocenos">Conocenos</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
@@ -39,7 +49,7 @@
   </div>
 </nav>
 <div class="container">
-  <div class="row">
+  <div class="row my-5">
     <router-outlet></router-outlet>
   </div>
 </div>
@@ -54,10 +64,10 @@
       <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
         <h6 class="text-uppercase font-weight-bold mb-4">Conocenos</h6>
         <ul class="list-unstyled mb-0">
-          <li class="mb-2"><a href="#" class="text-muted">Registrarse</a></li>
-          <li class="mb-2"><a href="#" class="text-muted">Iniciar Sesión</a></li>
-          <li class="mb-2"><a href="#" class="text-muted">Nuestras casas</a></li>
-          <li class="mb-2"><a href="#" class="text-muted">Dudas o preguntas</a></li>
+          <li class="mb-2"><a href="#" routerLinkActive="active" routerLink="registro" class="text-muted">Registrarse</a></li>
+          <li class="mb-2"><a href="#" routerLinkActive="active" routerLink="" class="text-muted">Iniciar Sesión</a></li>
+          <li class="mb-2"><a href="#" routerLinkActive="active" routerLink="home" class="text-muted">Nuestras casas</a></li>
+          <li class="mb-2"><a href="#" routerLinkActive="active" routerLink="conocenos" class="text-muted">Dudas o preguntas</a></li>
         </ul>
       </div>
       <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
