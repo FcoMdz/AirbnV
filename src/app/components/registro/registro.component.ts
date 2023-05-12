@@ -13,8 +13,11 @@ export class RegistroComponent {
     'email': new FormControl('', [Validators.required, Validators.email]),
     'usrName': new FormControl('', [Validators.required]),
     'telefono': new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('[0-9]*')]),
-    'passwd': new FormControl('', [Validators.required, Validators.minLength(5)])
+    'passwd': new FormControl('', [Validators.required, Validators.minLength(5)]),
+    'gender': new FormControl('', Validators.required)
   });
+
+  passwdConf = new FormControl('', Validators.required);
 
   usuariosFromLS: string[] = []
 
@@ -42,9 +45,13 @@ export class RegistroComponent {
     return this.usuario.get('passwd');
   }
 
+  public get gender() {
+    return this.usuario.get('gender');
+  }
+
   procesar() {
     this.usuariosFromLS.push(JSON.stringify(this.usuario.value))
-    localStorage.setItem('usuariosFromLS', this.usuariosFromLS.toString())
+    localStorage.setItem('usuarios', this.usuariosFromLS.toString())
 
     console.log("this.usuario.value ", this.usuario.value);
     console.log("this.usuariosFromLS ", this.usuariosFromLS);
@@ -58,10 +65,17 @@ export class RegistroComponent {
       this.usuariosObj[index] = JSON.parse(this.usuariosFromLS[index]);
     }
 
+    console.log("UsuariosObj: ", this.usuariosObj);
     for (let index = 0; index < this.usuariosObj.length; index++) {
       console.log("[" + index + "]", this.usuariosObj[index]);
     }
 
   }
 
+  checkPsswd(): boolean {
+    if (this.usuario.get('passwd')?.value === this.passwdConf.value) {
+      return true;
+    }
+    return false;
+  }
 }
