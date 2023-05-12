@@ -16,8 +16,11 @@ export class RegistroComponent {
     'passwd': new FormControl('', [Validators.required, Validators.minLength(5)])
   });
 
-  fondo = 'linear-gradient(135deg, #71b7e6, #9b59b6)';
+  usuariosFromLS: string[] = []
 
+  usuariosObj: Object[] = []
+
+  fondo = 'linear-gradient(135deg, #71b7e6, #9b59b6)';
 
   public get name() {
     return this.usuario.get('nombre');
@@ -40,7 +43,25 @@ export class RegistroComponent {
   }
 
   procesar() {
-    console.log(this.usuario.value);
+    this.usuariosFromLS.push(JSON.stringify(this.usuario.value))
+    localStorage.setItem('usuariosFromLS', this.usuariosFromLS.toString())
+
+    console.log("this.usuario.value ", this.usuario.value);
+    console.log("this.usuariosFromLS ", this.usuariosFromLS);
+
+    for (let index = 0; index < this.usuariosFromLS.length; index++) {
+      console.log("[" + index + "]", this.usuariosFromLS[index]);
+    }
+
+    //Recuperamos la info de LocalStorage y almacenamos en el array de objetos
+    for (let index = 0; index < this.usuariosFromLS.length; index++) {
+      this.usuariosObj[index] = JSON.parse(this.usuariosFromLS[index]);
+    }
+
+    for (let index = 0; index < this.usuariosObj.length; index++) {
+      console.log("[" + index + "]", this.usuariosObj[index]);
+    }
+
   }
 
 }
