@@ -16,6 +16,12 @@ export class RegistroComponent {
     'passwd': new FormControl('', [Validators.required, Validators.minLength(5)])
   });
 
+  passwd2 = new FormControl('', Validators.required)
+
+  usuarios: string[] = [];
+
+  usuariosAux: Object[] = [];
+
   fondo = 'linear-gradient(135deg, #71b7e6, #9b59b6)';
 
 
@@ -40,7 +46,32 @@ export class RegistroComponent {
   }
 
   procesar() {
-    console.log(this.usuario.value);
+    this.usuarios.push(JSON.stringify(this.usuario.value))
+    localStorage.setItem('usuarios', this.usuarios.toString())
+
+    console.log("this.usuario.value ", this.usuario.value);
+    console.log("this.usuarios ", this.usuarios);
+
+    for (let index = 0; index < this.usuarios.length; index++) {
+      console.log("[" + index + "]", this.usuarios[index]);
+    }
+
+    //Recuperamos la info de LocalStorage y almacenamos en el array de objetos
+    for (let index = 0; index < this.usuarios.length; index++) {
+      this.usuariosAux[index] = JSON.parse(this.usuarios[index]);
+    }
+
+    for (let index = 0; index < this.usuariosAux.length; index++) {
+      console.log("[" + index + "]", this.usuariosAux[index]);
+    }
+
+  }
+
+  checkPasswd(): boolean {
+    if(this.usuario.get('passwd') == document.getElementById('passwd2')) {
+      return true;
+    }
+    return false;
   }
 
 }

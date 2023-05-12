@@ -25,7 +25,7 @@ export class BusquedaComponent implements OnInit {
   cantPersonas: number = 1;
   minDate: Date = new Date();
   tmpDate: Date = new Date();
-  rangeDates: Date[] = [this.minDate, this.minDate];
+  rangeDates!: Date[];
   ciudades: Bioma[] = [];
   ciudadSeleccionada: Bioma = { name: "", code: "" };
   infoCasas:casasData[]=[];
@@ -78,15 +78,18 @@ export class BusquedaComponent implements OnInit {
           }
         }
       });
+      if(this.minValue == this.maxValue){
+        this.maxValue++;
+      }
       this.rangeValues = [this.minValue, this.maxValue];
       this.resultadosFiltrados = this.resultados;
+      if(localStorage.getItem("casasData") != null){
+        this.infoCasas = JSON.parse(localStorage.getItem('casasData') || "{}");
+      }else{
+        this.infoCasas = [];
+      }
+      this.filtrarResultados();
     });
-    if(localStorage.getItem("casasData") != null){
-      this.infoCasas = JSON.parse(localStorage.getItem('casasData') || "{}");
-    }else{
-      this.infoCasas = [];
-    }
-    this.filtrarResultados();
   }
 
   filtrarResultados(): void {
@@ -122,24 +125,25 @@ export class BusquedaComponent implements OnInit {
 
       //Comprobando disponibilidad de fechas
       let band = false
-      for (let index = 0; index < this.infoCasas.length; index++) {
-        const apartado = this.infoCasas[index];
-        if(apartado.id == element.id){
-          let fechaInicio = new Date(apartado.fechaInicio);
-          let fechaFinal = new Date(apartado.fechaFinal);
-          let fechaBusquedaInicio;
-          let fechaBusquedaFinal;
-          if(this.rangeDates[1] == null){
-            fechaBusquedaInicio = new Date(this.rangeDates[0].toDateString());
-            fechaBusquedaFinal = new Date(this.rangeDates[0].toDateString());
-          }else{
-            fechaBusquedaInicio = new Date(this.rangeDates[0].toDateString());
-            fechaBusquedaFinal = new Date(this.rangeDates[1].toDateString());
+      if(this.rangeDates!=undefined){
+        for (let index = 0; index < this.infoCasas.length; index++) {
+          const apartado = this.infoCasas[index];
+          if(apartado.id == element.id){
+            let fechaInicio = new Date(apartado.fechaInicio);
+            let fechaFinal = new Date(apartado.fechaFinal);
+            let fechaBusquedaInicio;
+            let fechaBusquedaFinal;
+            if(this.rangeDates[1] == null){
+              fechaBusquedaInicio = new Date(this.rangeDates[0].toDateString());
+              fechaBusquedaFinal = new Date(this.rangeDates[0].toDateString());
+            }else{
+              fechaBusquedaInicio = new Date(this.rangeDates[0].toDateString());
+              fechaBusquedaFinal = new Date(this.rangeDates[1].toDateString());
+            }
+            if(fechaFinal >= fechaBusquedaInicio && fechaInicio <= fechaBusquedaFinal){
+              band = true;
+            }
           }
-          if(fechaFinal >= fechaBusquedaInicio && fechaInicio <= fechaBusquedaFinal){
-            band = true;
-          }
-
         }
       }
       if(band) continue;

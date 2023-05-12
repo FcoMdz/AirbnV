@@ -1,7 +1,7 @@
 
 <div class="container my-5">
   <div class="row mb-4 p-3">
-    <div class="card">
+    <div class="card" @fade>
       <h1>Sobre Nosotros</h1>
       <p>
         Somos un equipo conformado de 4 integrantes universitarios, siendo esta
@@ -14,14 +14,14 @@
   </div>
   <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-4 mb-4">
     <div class="col mb-4">
-      <div class="card mb-3">
+      <div class="card mb-3" @fade>
         <div class="imgs my-2">
           <img
           src="../../../assets/Img/img1.jpg"
           class="img-fluid rounded"
           alt="..."
           />
-        </div> 
+        </div>
         <div class="card-body text-center">
           <h5 class="card-title">Gerardo Femat Delgado</h5>
           <p class="card-text">
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="col mb-4">
-      <div class="card mb-3">
+      <div class="card mb-3" @fade>
           <div class="imgs my-2">
             <img
               src="../../../assets/Img/img2.jpeg"
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="col mb-4">
-      <div class="card mb-3">
+      <div class="card mb-3" @fade>
           <div class="imgs my-2">
             <img
               src="../../../assets/Img/img4.jpg"
@@ -82,7 +82,7 @@
       </div>
     </div>
     <div class="col mb-4">
-      <div class="card mb-3">
+      <div class="card mb-3" @fade>
           <div class="imgs my-2">
             <img
               src="../../../assets/Img/img3.gif"
@@ -103,7 +103,7 @@
       </div>
     </div>
   </div>
-  <div class="row card mb-4 p-3">
+  <div class="row card mb-4 p-3" @fade>
     <h2 class="my-2">Acerca de nuestra pagina</h2>
     <p>
       Somos una pagina que renta casas de Minecraft, del famoso youtuber Samuel de
@@ -124,7 +124,7 @@
       </div>
     </div>
   </div>
-  <div class="row mb-4 card p-3">
+  <div class="row mb-4 card p-3" @fade>
     <h2>Acerca del creador de las casas:</h2>
     <p>
       Samuel de Luque Batuecas (Madrid, España; 12 de abril de 1989), más conocido
@@ -133,7 +133,7 @@
       de 33 millones de suscriptores y 15 mil millones de visitas
     </p>
     <div class="container row">
-      <div class="col-6">
+      <div class="col-12 col-lg-6">
         <div
           id="carouselExampleIndicators"
           class="carousel slide cont"
@@ -207,7 +207,7 @@
           </button>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-lg-6">
         <h2>Estamos regalando una casa</h2>
         <p>
           Por unica, ocasion, estamos sorteando una casa, completamente gratis. Lo
@@ -215,8 +215,8 @@
           campanita, y ya estas participando!.
         </p>
         <iframe
-          width="560"
-          height="315"
+          width="100%"
+          height="350px"
           [src]="link | video : 'https://www.youtube.com/embed/'"
           title="YouTube video player"
           frameborder="0"
