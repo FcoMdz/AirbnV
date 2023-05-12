@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -69,7 +70,6 @@ export class RegistroComponent {
     for (let index = 0; index < this.usuariosObj.length; index++) {
       console.log("[" + index + "]", this.usuariosObj[index]);
     }
-
   }
 
   checkPsswd(): boolean {
