@@ -6,7 +6,6 @@ import { Casa, CasasService } from 'src/app/services/casas.service';
 import { LocalStorageService, casasData } from 'src/app/services/local-storage.service';
 import Swal from 'sweetalert2';
 import * as L from 'leaflet';
-import { ZoomAnimEvent } from 'leaflet';
 @Component({
   selector: 'app-casa',
   templateUrl: './casa.component.html',
@@ -14,6 +13,7 @@ import { ZoomAnimEvent } from 'leaflet';
 })
 export class CasaComponent implements OnInit, AfterViewInit {
   i:number[] = [];
+  
   minDate: Date = new Date();
   tmpDate: Date = new Date();
   maxDate: Date = new Date(this.tmpDate.setMonth(this.tmpDate.getMonth() + 12));
@@ -22,7 +22,7 @@ export class CasaComponent implements OnInit, AfterViewInit {
   casa: Casa = {id: 0,
     nombre: "",
     precio: 0,
-    rutaImg: "",
+    rutaImg: [""],
     descripcion:"",
     categoria:"",
     maxPersonas: 0,
@@ -80,7 +80,7 @@ export class CasaComponent implements OnInit, AfterViewInit {
   ///////////////////Fin Geras mapa
 
   constructor(private casaService:CasasService, private rutaActiva:ActivatedRoute){
-
+    
     const routeParams = this.rutaActiva.snapshot.params;
     this.casaService.casas.forEach(casita => {
       if(casita.nombre === this.rutaActiva.snapshot.params['casa']){
@@ -88,7 +88,7 @@ export class CasaComponent implements OnInit, AfterViewInit {
           id: casita.id,
           nombre: casita.nombre,
           precio: casita.precio,
-          rutaImg: "../"+casita.rutaImg,
+          rutaImg: casita.rutaImg,
           descripcion:casita.descripcion,
           categoria:casita.categoria,
           maxPersonas: casita.maxPersonas,
@@ -131,7 +131,7 @@ export class CasaComponent implements OnInit, AfterViewInit {
           id: casita.id,
           nombre: casita.nombre,
           precio: casita.precio,
-          rutaImg: "../"+casita.rutaImg,
+          rutaImg: casita.rutaImg,
           descripcion:casita.descripcion,
           categoria:casita.categoria,
           maxPersonas: casita.maxPersonas,
