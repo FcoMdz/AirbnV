@@ -83,13 +83,10 @@
 
           <div class="input-box">
             <label class="form-label">Confirmar Contraseña</label>
-            <input type="password" class="form-control" [formControl]="passwd2" placeholder="Confirma la contraseña">
+            <input type="password" class="form-control" [formControl]="passwdConf" placeholder="Confirma la contraseña">
 
-            <div class="alert alert-danger mt-2" [hidden]="passwd2">
-              <span *ngIf="passwd2?.errors?.['required']">
-                La contraseña es requerida
-              </span>
-              <span *ngIf="passwd2?.value == passwd?.value">
+            <div class="alert alert-danger mt-2" [hidden]=" passwdConf.pristine || checkPsswd()">
+              <span>
                 La contraseña no coincide
               </span>
             </div>
@@ -99,30 +96,29 @@
         </div>
 
         <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
-          <input type="radio" name="gender" id="dot-3">
+          <input type="radio" name="gender" id="dot-1" formControlName="gender" value="hombre">
+          <input type="radio" name="gender" id="dot-2" formControlName="gender" value="mujer">
+          <input type="radio" name="gender" id="dot-3" formControlName="gender" value="unknown">
           <span class="gender-title">Genero</span>
           <div class="category">
             <label for="dot-1">
               <span class="dot one"></span>
-              <span class="gender">Hombre</span>
+              Hombre
             </label>
             <label for="dot-2">
-              <span class="dot two"></span>
-              <span class="gender">Mujer</span>
+              <span class=" dot two"></span>
+              Mujer
             </label>
             <label for="dot-3">
               <span class="dot three"></span>
-              <span class="gender">Prefiero no decirlo</span>
+              Prefiero no decirlo
             </label>
           </div>
         </div>
-        <div id="registro" [ngClass]="usuario.invalid ? 'deshabilitado':'habilitado'" class="button">
+        <div id="registro" [ngClass]="(usuario.invalid || !(checkPsswd()) ? 'deshabilitado':'habilitado'" class="button">
           <input type="submit" value="Registrar">
         </div>
       </form>
     </div>
   </div>
 </div>
-
