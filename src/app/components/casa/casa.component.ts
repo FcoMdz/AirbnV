@@ -1,16 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, AfterViewInit, HostListener } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { max, retry } from 'rxjs';
 import { Casa, CasasService } from 'src/app/services/casas.service';
 import { LocalStorageService, casasData } from 'src/app/services/local-storage.service';
 import Swal from 'sweetalert2';
+import * as L from 'leaflet';
+import { ZoomAnimEvent } from 'leaflet';
 @Component({
   selector: 'app-casa',
   templateUrl: './casa.component.html',
   styleUrls: ['./casa.component.css']
 })
-export class CasaComponent implements OnInit {
+export class CasaComponent implements OnInit, AfterViewInit {
   i:number[] = [];
   minDate: Date = new Date();
   tmpDate: Date = new Date();
@@ -30,6 +32,52 @@ export class CasaComponent implements OnInit {
   fechaActual = new Date();
   fecha:string = "";
   diasdesh:Date[]=[];
+  ///////////////////////Comienza programación del mapa
+  /*@Output() map$: EventEmitter<L.Map> = new EventEmitter;
+  @Output() zoom$: EventEmitter<number> = new EventEmitter;
+  @Input() options: L.MapOptions= {
+                      layers:[L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        opacity: 0.7,
+                        maxZoom: 19,
+                        detectRetina: true,
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                      })],
+                      zoom:1,
+                      center:L.latLng(0,0)
+  };
+  public map!: L.Map;
+  public zoom!: number;
+
+  onMapReady(map: L.Map) {
+    this.map = map;
+    this.map$.emit(map);
+    this.zoom = map.getZoom();
+    this.zoom$.emit(this.zoom);
+  }
+
+  onMapZoomEnd({ event }: { event: ZoomAnimEvent; }) {
+    this.zoom = event.target.getZoom();
+    this.zoom$.emit(this.zoom);
+  }*/
+  ///////////////////Termina programación mapa
+
+  ///////////////////Geras mapa
+  private mapa!:L.Map;
+  private tiles!:any;
+  ngAfterViewInit(): void {
+    this.mapa = L.map('map',{
+      center: [51.505, -0.09],
+      zoom: 13
+    });
+    this.tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      minZoom: 3,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+    this.tiles.addTo(this.mapa);
+  }
+  
+  ///////////////////Fin Geras mapa
 
   constructor(private casaService:CasasService, private rutaActiva:ActivatedRoute){
 
@@ -50,8 +98,6 @@ export class CasaComponent implements OnInit {
       }
 
     });
-    this.actualizarFechasDisponibles();
-
   }
 
   actualizarFechasDisponibles():void{
@@ -73,7 +119,10 @@ export class CasaComponent implements OnInit {
     }
   }
 
+ 
+
   ngOnInit(){
+    this.actualizarFechasDisponibles();
     this.fecha = this.fechaActual.toLocaleString( );
     const routeParams = this.rutaActiva.snapshot.params;
     this.casaService.casas.forEach(casita => {

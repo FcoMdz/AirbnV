@@ -9,7 +9,7 @@ export class CasasService {
     { id: 1,
       nombre: "Casa 1",
       precio:100000,
-      rutaImg:"../../assets/images/img1.png",
+      rutaImg:"../../assets/casas/casa1",
       descripcion:"Esta casa tiene bastante que ofrecer",
       categoria: "Casa grande",
       maxPersonas: 5,

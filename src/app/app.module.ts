@@ -28,6 +28,8 @@ import { ConocenosComponent } from './components/conocenos/conocenos.component';
 
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { VideoPipe } from './video.pipe';
+import { DudasComponent } from './dudas/dudas.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     CardsComponent,
     CasaComponent,
     ConocenosComponent,
+    VideoPipe,
+    DudasComponent,
   ],
   imports: [
     BrowserModule,
