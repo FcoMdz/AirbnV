@@ -115,7 +115,8 @@
             </label>
           </div>
         </div>
-        <div id="registro" [ngClass]="(usuario.invalid || !(checkPsswd()) ? 'deshabilitado':'habilitado'" class="button">
+        <div id="registro" [ngClass]="(usuario.invalid || !(checkPsswd())) ? 'deshabilitado':'habilitado'"
+          class="button">
           <input type="submit" value="Registrar">
         </div>
       </form>
