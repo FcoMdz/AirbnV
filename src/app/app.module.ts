@@ -11,6 +11,7 @@ import { CasaComponent } from './components/casa/casa.component';
 import { CasasService } from './services/casas.service';
 import { PrincipalComponent } from './components/principal/principal.component';
 
+import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -63,7 +64,8 @@ import { SkinsComponent } from './components/skins/skins.component';
     DropdownModule,
     FormsModule,
     ReactiveFormsModule,
-    LeafletModule
+    LeafletModule,
+    HttpClientModule
   ],
   providers: [CasasService],
   bootstrap: [AppComponent]

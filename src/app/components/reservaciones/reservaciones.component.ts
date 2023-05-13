@@ -1,3 +1,4 @@
+import { EmptyExpr } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { LocalStorageService, casasData } from 'src/app/services/local-storage.service';
 
@@ -8,9 +9,20 @@ import { LocalStorageService, casasData } from 'src/app/services/local-storage.s
 })
 export class ReservacionesComponent {
   data!:any;
+  informacion!:any;
   constructor(){
     this.data =  localStorage.getItem('casasData');
-    this.data = JSON.parse(this.data)
-    console.log(this.data[1]);
+    if(this.data != null){
+      this.informacion = JSON.parse(this.data);
+      console.log(this.informacion);
+    }
+    
+  }
+
+  verififcarDatos():boolean{
+    if(this.data == null){
+      return false;
+    }
+    return true;
   }
 }

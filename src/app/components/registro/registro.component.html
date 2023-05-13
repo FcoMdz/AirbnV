@@ -1,5 +1,41 @@
 <div class="body">
   <div class="container">
+    <div class="title">Iniciar Sesión</div>
+    <form [formGroup]="sesion" (ngSubmit)="login()">
+      <div class="user-details row">
+        <div class="input-box col-6 mx-2">
+          <label class="form-label">Nombre de usuario</label>
+          <input type="text" class="form-control" formControlName="usrNameLog"
+            placeholder="Ingresa tu nombre de usuario">
+  
+          <div class="alert alert-danger mt-2" [hidden]="usrNameLog?.pristine || usrNameLog?.valid">
+            <span *ngIf="usrNameLog?.errors?.['required']">
+              El nombre de usuario es requerido
+            </span>
+          </div>
+        </div>
+  
+        <div class="input-box col-6 mx-2">
+          <label class="form-label">Contraseña</label>
+          <input type="password" class="form-control" formControlName="passwdLog" placeholder="Escribe una contraseña">
+  
+          <div class="alert alert-danger mt-2" [hidden]="passwdLog?.pristine || passwdLog?.valid">
+            <span *ngIf="passwdLog?.errors?.['required']">
+              La contraseña es requerida
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <div id="inicio" [ngClass]="(sesion.invalid || !(checkPsswd())) ? 'deshabilitado':'habilitado'"
+      class="button">
+      <input type="submit" value="Iniciar Sesión">
+      </div>
+
+    </form>
+
+    <hr>
+    
     <div class="title">Registro</div>
     <div class="content">
       <form [formGroup]="usuario" (ngSubmit)="procesar()">
@@ -90,11 +126,8 @@
                 La contraseña no coincide
               </span>
             </div>
-
           </div>
-
         </div>
-
         <div class="gender-details">
           <input type="radio" name="gender" id="dot-1" formControlName="gender" value="hombre">
           <input type="radio" name="gender" id="dot-2" formControlName="gender" value="mujer">

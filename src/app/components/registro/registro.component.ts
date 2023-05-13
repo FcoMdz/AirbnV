@@ -1,28 +1,41 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  styleUrls: ['./registro.component.css'],
 })
 export class RegistroComponent {
-
+  data!: any;
   usuario = new FormGroup({
-    'nombre': new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z ]*')]),
-    'email': new FormControl('', [Validators.required, Validators.email]),
-    'usrName': new FormControl('', [Validators.required]),
-    'telefono': new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('[0-9]*')]),
-    'passwd': new FormControl('', [Validators.required, Validators.minLength(5)]),
-    'gender': new FormControl('', Validators.required)
+    nombre: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[a-zA-Z ]*'),
+    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    usrName: new FormControl('', [Validators.required]),
+    telefono: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(10),
+      Validators.pattern('[0-9]*'),
+    ]),
+    passwd: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    gender: new FormControl('', Validators.required),
   });
-
+  sesion = new FormGroup({
+    usrNameLog: new FormControl('', [Validators.required]),
+    passwdLog: new FormControl('', [Validators.required]),
+  });
   passwdConf = new FormControl('', Validators.required);
 
-  usuariosFromLS: string[] = []
+  usuariosFromLS: any[] = [];
 
-  usuariosObj: Object[] = []
+  usuariosObj: Object[] = [];
+
+  localStorageData: any = '';
 
   fondo = 'linear-gradient(135deg, #71b7e6, #9b59b6)';
 
@@ -50,26 +63,70 @@ export class RegistroComponent {
     return this.usuario.get('gender');
   }
 
+  public get passwdLog() {
+    return this.sesion.get('passwdLog');
+  }
+
+  public get usrNameLog() {
+    return this.sesion.get('usrNameLog');
+  }
   procesar() {
-    this.usuariosFromLS.push(JSON.stringify(this.usuario.value))
-    localStorage.setItem('usuarios', this.usuariosFromLS.toString())
+    console.log(this.usuariosFromLS);
 
-    console.log("this.usuario.value ", this.usuario.value);
-    console.log("this.usuariosFromLS ", this.usuariosFromLS);
+    if (document.getElementById('registro')?.classList.contains('habilitado')) {
+      this.localStorageData = localStorage.getItem('usuarios');
+      console.log(this.localStorageData);
 
-    for (let index = 0; index < this.usuariosFromLS.length; index++) {
-      console.log("[" + index + "]", this.usuariosFromLS[index]);
+      if (this.localStorageData != null) {
+        console.log('Hay datos en el LocalStorage: ', this.localStorageData);
+
+        this.usuariosFromLS.push(JSON.parse(this.localStorageData));
+
+        this.usuariosFromLS.push(this.usuario.value);
+
+        localStorage.setItem('usuarios', JSON.stringify(this.usuariosFromLS));
+
+        console.log('this.usuario.value ', this.usuario.value);
+        console.log('this.usuariosFromLS ', this.usuariosFromLS);
+      } else {
+        localStorage.setItem('usuarios', JSON.stringify(this.usuario.value));
+      }
+      Swal.fire(
+        'Registro confirmado',
+        'Se ha registrado correctamente',
+        'success'
+      );
+    } else {
+      Swal.fire('Error', 'Verifique que los datos estén completos', 'error');
     }
-
-    //Recuperamos la info de LocalStorage y almacenamos en el array de objetos
-    for (let index = 0; index < this.usuariosFromLS.length; index++) {
-      this.usuariosObj[index] = JSON.parse(this.usuariosFromLS[index]);
+  }
+  login() {
+    this.data = localStorage.getItem('usuarios');
+    this.data = JSON.parse(this.data);
+    console.log(this.data);
+    let band = false;
+    this.data.forEach((user: any) => {
+      if (
+        user.nombre === this.sesion.value['usrNameLog'] &&
+        user.passwd === this.sesion.value['passwdLog']
+      ) {
+        sessionStorage.setItem('usr', JSON.stringify(user));
+        Swal.fire(
+          'Inicio de sesión',
+          'Se ha iniciado correctamente',
+          'success'
+        );
+        band = true;
+      }
+    });
+    if (!band) {
+      Swal.fire('Inicio de sesión', 'Revise sus datos', 'error');
     }
-
-    console.log("UsuariosObj: ", this.usuariosObj);
-    for (let index = 0; index < this.usuariosObj.length; index++) {
-      console.log("[" + index + "]", this.usuariosObj[index]);
-    }
+    /*console.log(this.data.usrName);
+    console.log(this.sesion.value['usrNameLog']);
+    if(this.data.usrName === this.sesion.value['usrNameLog'] && this.data.passwd === this.sesion.value['passwdLog']){
+      sessionStorage.setItem('usr',JSON.stringify(this.sesion.value['usrNameLog']));
+    }*/
   }
 
   checkPsswd(): boolean {

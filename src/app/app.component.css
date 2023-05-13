@@ -5,8 +5,15 @@ nav{
 footer{
     background-color: #3B0D96;
     color: #FFFFFF;
+    width: 100%;
 }
 
+.todo{
+
+        display: flex;
+        flex-direction: column;
+      
+}
 .nav777{
     aspect-ratio: 3/2;
     object-fit: contain;

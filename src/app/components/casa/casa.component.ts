@@ -13,7 +13,7 @@ import * as L from 'leaflet';
 })
 export class CasaComponent implements OnInit, AfterViewInit {
   i:number[] = [];
-  
+  usuario!:any;
   minDate: Date = new Date();
   tmpDate: Date = new Date();
   maxDate: Date = new Date(this.tmpDate.setMonth(this.tmpDate.getMonth() + 12));
@@ -81,7 +81,8 @@ export class CasaComponent implements OnInit, AfterViewInit {
   ///////////////////Fin Geras mapa
 
   constructor(private casaService:CasasService, private rutaActiva:ActivatedRoute){
-    
+    this.usuario = JSON.parse(sessionStorage.getItem('usr')!);
+    console.log(this.usuario);
     const routeParams = this.rutaActiva.snapshot.params;
     this.casaService.casas.forEach(casita => {
       if(casita.nombre === this.rutaActiva.snapshot.params['casa']){
@@ -160,95 +161,77 @@ export class CasaComponent implements OnInit, AfterViewInit {
 
   registrarReserva():void{
     //Aqui se obtienen las fechas que selecciono el usuario
-    let fechaSeleccionadaInicio:string;
-    let fechaSeleccionadaFinal:string;
-    if(this.reserva.value.fecha[1] == null){
-      fechaSeleccionadaInicio = this.reserva.value.fecha[0].toDateString();
-      fechaSeleccionadaFinal = this.reserva.value.fecha[0].toDateString();
-    }else{
-      fechaSeleccionadaInicio = this.reserva.value.fecha[0].toDateString();
-      fechaSeleccionadaFinal = this.reserva.value.fecha[1].toDateString();
-    }
-
-
-    //NOTA: hay que hacer dinámica la seleccion de fechas y comprobar que sea correcto
-    let infoCasas:casasData[];
-    let casaAgregar:casasData = {
-      id: this.casa.id,
-      personas: this.reserva.value.CantidadPersona,
-      precio: this.casa.precio,
-      fechaInicio: fechaSeleccionadaInicio,
-      fechaFinal: fechaSeleccionadaFinal
-    };
-    if(localStorage.getItem("casasData") === null){
-      infoCasas = [];
-      infoCasas.push(casaAgregar);
-    }else{
-      infoCasas = JSON.parse(localStorage.getItem('casasData') || "{}");
-      let band = false;
-      infoCasas.forEach(apartado => {
-        if(apartado.id == this.casa.id){
-          let fechaInicio = new Date(apartado.fechaInicio);
-          let fechaFinal = new Date(apartado.fechaFinal);
-          let fechaNuevaInicio = new Date(fechaSeleccionadaInicio);
-          let fechaNuevaFinal = new Date(fechaSeleccionadaFinal);
-          if(fechaFinal >= fechaNuevaInicio && fechaInicio <= fechaNuevaFinal){
-            band = true;
-          }
-        }
-      });
-
-      if(band){
-        Swal.fire('Error','Ha ocurrido un error al verificar las fechas, revise que su seleccion este habilitada','error');
+    if(this.verificarUsr()){
+      let fechaSeleccionadaInicio:string;
+      let fechaSeleccionadaFinal:string;
+      let horaSeleccionadaInicio:string;
+      let horaSeleccionadaFinal:string;
+      if(this.reserva.value.fecha[1] == null){
+        fechaSeleccionadaInicio = this.reserva.value.fecha[0].toDateString();
+        fechaSeleccionadaFinal = this.reserva.value.fecha[0].toDateString();
+        horaSeleccionadaInicio = this.reserva.value.fecha[0].toTimeString();
+        horaSeleccionadaFinal = this.reserva.value.fecha[0].toTimeString();
       }else{
+        fechaSeleccionadaInicio = this.reserva.value.fecha[0].toDateString();
+        fechaSeleccionadaFinal = this.reserva.value.fecha[1].toDateString();
+        horaSeleccionadaInicio = this.reserva.value.fecha[0].toTimeString();
+        horaSeleccionadaFinal = this.reserva.value.fecha[1].toTimeString();
+      }
+  
+      
+      //NOTA: hay que hacer dinámica la seleccion de fechas y comprobar que sea correcto
+      let infoCasas:casasData[];
+      let casaAgregar:casasData = {
+        usr: this.usuario.nombre,
+        id: this.casa.id,
+        personas: this.reserva.value.CantidadPersona,
+        precio: this.casa.precio,
+        fechaInicio: fechaSeleccionadaInicio,
+        fechaFinal: fechaSeleccionadaFinal,
+        horaInicio: horaSeleccionadaInicio,
+        horaFinal: horaSeleccionadaFinal
+      };
+      console.log(casaAgregar);
+      if(localStorage.getItem("casasData") === null){
+        infoCasas = [];
         infoCasas.push(casaAgregar);
         Swal.fire('Apartado Confirmado','Se ha registrado su apartado','success');
+      }else{
+        infoCasas = JSON.parse(localStorage.getItem('casasData') || "{}");
+        let band = false;
+        infoCasas.forEach(apartado => {
+          if(apartado.id == this.casa.id){
+            let fechaInicio = new Date(apartado.fechaInicio);
+            let fechaFinal = new Date(apartado.fechaFinal);
+            let fechaNuevaInicio = new Date(fechaSeleccionadaInicio);
+            let fechaNuevaFinal = new Date(fechaSeleccionadaFinal);
+            if(fechaFinal >= fechaNuevaInicio && fechaInicio <= fechaNuevaFinal){
+              band = true;
+            }
+          }
+        });
+  
+        if(band){
+          Swal.fire('Error','Ha ocurrido un error al verificar las fechas, revise que su seleccion este habilitada','error');
+        }else{
+          infoCasas.push(casaAgregar);
+          Swal.fire('Apartado Confirmado','Se ha registrado su apartado','success');
+        }
       }
+      localStorage.setItem('casasData',JSON.stringify(infoCasas));
+      this.actualizarFechasDisponibles();
+    }else{
+      Swal.fire('Inicio Sesión','Debe iniciar sesión para registrar una reserva','error');
     }
-    this.actualizarFechasDisponibles();
-    localStorage.setItem('casasData',JSON.stringify(infoCasas));
+    
+  }
+  verificarUsr():boolean{
+    let sessionData = sessionStorage.getItem('usr')
+    if(sessionData!=null){
+      return true;
+    }else{
+      return false;
+    }
   }
 
-  /*
-  Intento fallido de revisar la fecha
-  validarFecha(control:AbstractControl):ValidationErrors | null{
-    let fechaInicio = new Date(control.value[0]);
-    let fechaFinal = new Date(control.value[1]);
-
-    let diasdesh:Date[] = [];
-    let fechas:Date[] = [];
-    while(fechaInicio <= fechaFinal){
-      fechas.push(new Date(fechaInicio));
-      fechaInicio.setDate(fechaInicio.getDate()+1);
-    }
-
-    let infoCasas:casasData[];
-    if(localStorage.getItem("casasData") != null){
-      infoCasas = JSON.parse(localStorage.getItem('casasData') || "{}");
-      infoCasas.forEach(apartado => {
-        if(apartado.id == this.casa.id){
-          let fechas:Date[] = [];
-          let fechaInicio = new Date(apartado.fechaInicio);
-          let fechaFinal = new Date(apartado.fechaFinal);
-          while(fechaInicio <= fechaFinal){
-            fechas.push(new Date(fechaInicio));
-            fechaInicio.setDate(fechaInicio.getDate()+1);
-          }
-          diasdesh = diasdesh.concat(fechas);
-        }
-      });
-    }
-
-    let band = false;
-
-    fechas.forEach(fecha => {
-      if(diasdesh.includes(fecha)){
-        band = true;
-      }
-    })
-    if(band){
-      return null;
-    }
-    return {validarFecha:true};
-  }*/
 }

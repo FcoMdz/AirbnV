@@ -1,3 +1,4 @@
+<div class="body">
 <div class="card m-4 text-center">
   <div class="card-body row">
     <div class="col-12 col-lg-6 mb-3">
@@ -96,9 +97,16 @@
           </div>
 
           <div class="my-3">
-            <button type="submit" class="btn btn-outline-dark">
+            <div  *ngIf="verificarUsr(); else NoUsr" >
+              <button type="submit" class="btn btn-outline-dark">
               Hacer cotización
-            </button>
+              </button>
+            </div>
+            <ng-template #NoUsr>
+              <button type="submit" class="btn btn-outline-dark" disabled>
+                Inicia sesión para continuar
+                </button>
+            </ng-template>
           </div>
         </form>
       </div>
@@ -111,12 +119,13 @@
       </div>
     </div>
   </div>
-  <div class="card-footer text-center">
+ <!-- <div class="card-footer text-center">
     <div *ngIf="reserva.valid; else error" class="alert alert-success">
       Los datos ingresados son correctos
     </div>
     <ng-template #error>
       <div class="alert alert-danger">Los datos ingresados son incorrectos</div>
     </ng-template>
-  </div>
+  </div> -->
+</div>
 </div>

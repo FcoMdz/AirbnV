@@ -8,9 +8,12 @@ export class LocalStorageService {
   constructor() { }
 }
 export interface casasData{
+  usr:string;
   id:number;
   personas:number;
   precio:number;
   fechaInicio:string;
   fechaFinal:string;
+  horaInicio:string;
+  horaFinal:string;
 }
